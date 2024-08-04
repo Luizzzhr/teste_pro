@@ -4,9 +4,9 @@
             <v-toolbar flat>
                 <v-toolbar-title>Consultar</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <inertia-link href="/pessoas/create">
+                <a href="/pessoas/create">
                     <v-btn color="primary">Criar Pessoa</v-btn>
-                </inertia-link>
+                </a>
             </v-toolbar>
         </v-card-title>
 

@@ -4,13 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\EnderecoController;
 
-
-use Inertia\Inertia;
-
-Route::get('/address-lookup', function () {
-    return Inertia::render('AddressLookup');
-});
-
 Route::get('/', function () {
     return view('welcome');
 });

@@ -43,9 +43,13 @@ class PessoaController extends Controller
 
      public function show(Pessoa $pessoa)
      {
-         return Inertia::render('Pessoas/Show', [
-             'pessoa' => $pessoa->load('enderecos') // carregar endereços com a pessoa
-         ]);
+        $pessoa = Pessoa::with(['enderecos' => function ($query) {
+            $query->withTrashed();
+        }])->findOrFail($pessoa->id);
+
+        return Inertia::render('Pessoas/Show', [
+            'pessoa' => $pessoa
+        ]);
      }
 
      public function edit(Pessoa $pessoa)

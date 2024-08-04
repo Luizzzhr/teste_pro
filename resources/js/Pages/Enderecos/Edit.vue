@@ -33,8 +33,8 @@
             <div>
                 <label>Tipo</label>
                 <select v-model="form.tipo" required>
-                    <option value="residencial">Residencial</option>
-                    <option value="comercial">Comercial</option>
+                    <option value="Residencial">Residencial</option>
+                    <option value="Comercial">Comercial</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>

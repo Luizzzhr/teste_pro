@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class EnderecoController extends Controller
 {
-      public function store(Request $request)
+      public function store(Request $request, Pessoa $pessoa)
       {
           $request->validate([
               'pessoa_id' => 'required|exists:pessoas,id',
@@ -22,10 +22,10 @@ class EnderecoController extends Controller
               'estado' => 'required|string',
               'cidade' => 'required|string',
           ]);
-
+          
           Endereco::create($request->all());
 
-          return redirect()->route('pessoas.show', $request->pessoa_id);
+          return redirect()->route('pessoas.show', $pessoa);
       }
 
       public function edit(Endereco $endereco)
@@ -53,7 +53,28 @@ class EnderecoController extends Controller
           return redirect()->route('pessoas.show', $endereco->pessoa_id);
       }
 
-      public function create(Pessoa $pessoa){
-        return Inertia::render('Enderecos/Create',['pessoa' => $pessoa]);
-      }
+      public function create(Pessoa $pessoa)
+        {
+            return Inertia::render('Enderecos/Create', [
+                'pessoa' => $pessoa
+            ]);
+        }
+
+        public function index()
+        {
+            $enderecos = Endereco::all();
+            return Inertia::render('Endereco/Index', [
+                'enderecos' => $enderecos
+            ]);
+        }
+
+        public function destroy(Endereco $endereco)
+        {
+            $endereco->delete();
+            $pessoa = Pessoa::find($endereco->pessoa_id)->load('enderecos');
+
+            return Inertia::render('Pessoas/Show', [
+             'pessoa' => $pessoa->load('enderecos')
+         ]);    
+        }
 }

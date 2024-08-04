@@ -33,8 +33,8 @@
             <div>
                 <label>Tipo</label>
                 <select v-model="form.tipo" required>
-                    <option value="residencial">Residencial</option>
-                    <option value="comercial">Comercial</option>
+                    <option value="Residencial">Residencial</option>
+                    <option value="Comercial">Comercial</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
@@ -52,6 +52,7 @@ export default {
         const { props } = usePage();
 
         const form = reactive({
+            pessoa_id: props.pessoa.id,
             cep: '',
             logradouro: '',
             numero: '',
@@ -59,7 +60,7 @@ export default {
             bairro: '',
             cidade: '',
             estado: '',
-            tipo: 'residencial'
+            tipo: 'Residencial'
         });
 
         const readonlyFields = reactive({

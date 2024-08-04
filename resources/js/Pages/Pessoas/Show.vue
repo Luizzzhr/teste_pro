@@ -32,7 +32,7 @@
                 <td>{{ endereco.estado }}</td>
                 <td>{{ endereco.tipo }}</td>
                 <td>
-                    <Link :href="`/enderecos/${endereco.id}/edit`" class="btn btn-warning">Editar</Link>
+                    <a :href="`/enderecos/${endereco.id}/edit`" class="btn btn-warning">Editar</a>
                     <button @click="destroy(endereco.id)" class="btn btn-danger">Deletar</button>
                 </td>
             </tr>

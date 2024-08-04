@@ -14,10 +14,6 @@
                 <label>CPF</label>
                 <input v-model="form.cpf" type="text" required>
             </div>
-            <div>
-                <label>Data de Nascimento</label>
-                <input v-model="form.data_nascimento" type="date" required>
-            </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
     </div>
@@ -34,8 +30,7 @@ export default {
         const form = reactive({
             nome: props.pessoa.nome,
             email: props.pessoa.email,
-            cpf: props.pessoa.cpf,
-            data_nascimento: props.pessoa.data_nascimento
+            cpf: props.pessoa.cpf
         });
 
         function submit() {

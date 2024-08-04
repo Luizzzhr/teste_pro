@@ -1,26 +1,61 @@
 <template>
-    <div>
+    <v-card>
         <h1>Criar Pessoa</h1>
-        <form @submit.prevent="submit">
-            <div>
-                <label>Nome</label>
-                <input v-model="form.nome" type="text" required>
-            </div>
-            <div>
-                <label>Email</label>
-                <input v-model="form.email" type="email" required>
-            </div>
-            <div>
-                <label>CPF</label>
-                <input v-model="form.cpf" type="text" required>
-            </div>
-            <div>
-                <label>Data de Nascimento</label>
-                <input v-model="form.data_nascimento" type="date" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
-        </form>
-    </div>
+        <v-form v-model="valid" @submit.prevent="submit">
+            <v-container>
+                <v-row>
+                    <v-col
+                        cols="12"
+                        md="4"
+                    >
+                        <v-text-field
+                            v-model="form.nome"
+                            :counter="10"
+                            :rules="nameRules"
+                            label="Name"
+                            hide-details
+                            required
+                        ></v-text-field>
+                    </v-col>
+
+                    <v-col
+                        cols="12"
+                        md="4"
+                    >
+                        <v-text-field
+                            v-model="form.email"
+                            :counter="10"
+                            :rules="emailRules"
+                            label="Email"
+                            hide-details
+                            required
+                        ></v-text-field>
+                    </v-col>
+
+                    <v-col
+                        cols="12"
+                        md="4"
+                    >
+                        <v-text-field
+                            v-model="form.cpf"
+                            :counter="10"
+                            :rules="nameRules"
+                            label="CPF"
+                            hide-details
+                            required
+                        ></v-text-field>
+                    </v-col>
+                </v-row>
+            </v-container>
+            <v-btn
+                class="mt-2"
+                text="Submit"
+                type="submit"
+                block
+            ></v-btn>
+            
+        </v-form>
+    </v-card>
 </template>
 
 <script>
@@ -28,12 +63,39 @@ import { reactive } from 'vue';
 import { router } from '@inertiajs/vue3'
 
 export default {
+    data: () => ({
+        valid: false,
+        nameRules: [
+            value => {
+                if (value) return true
+
+                return 'Name is required.'
+            },
+            value => {
+                if (value?.length <= 10) return true
+
+                return 'Name must be less than 10 characters.'
+            },
+        ],
+        emailRules: [
+            value => {
+                if (value) return true
+
+                return 'E-mail is requred.'
+            },
+            value => {
+                if (/.+@.+\..+/.test(value)) return true
+
+                return 'E-mail must be valid.'
+            },
+        ],
+    }),
+
     setup() {
         const form = reactive({
             nome: '',
             email: '',
-            cpf: '',
-            data_nascimento: ''
+            cpf: ''
         });
 
         function submit() {
